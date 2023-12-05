@@ -15,7 +15,7 @@ func AddOrder(order *model.Order) error {
 	return nil
 }
 
-//GetOrders 获取数据库中所有的订单
+// GetOrders 获取数据库中所有的订单
 func GetOrders() ([]*model.Order, error) {
 	//写sql语句
 	sqlStr := "select id,create_time,total_count,total_amount,state,user_id from orders"
@@ -36,7 +36,7 @@ func GetOrders() ([]*model.Order, error) {
 	return orders, nil
 }
 
-//GetMyOrders 获取我的订单
+// GetMyOrders 获取我的订单
 func GetMyOrders(userID int) ([]*model.Order, error) {
 	//写sql语句
 	sqlStr := "select id,create_time,total_count,total_amount,state,user_id from orders where user_id = ?"
@@ -61,7 +61,7 @@ func GetMyOrders(userID int) ([]*model.Order, error) {
 	return orders, nil
 }
 
-//UpdateOrderState 更新订单的状态，即发货和收货
+// UpdateOrderState 更新订单的状态，即发货和收货
 func UpdateOrderState(orderID string, state int64) error {
 	sqlStr := "update orders set state = ? where id = ?"
 	_, err := utils.Db.Exec(sqlStr, state, orderID)

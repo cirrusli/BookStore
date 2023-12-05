@@ -6,7 +6,7 @@ import (
 	"log"
 )
 
-//AddCart 向购物车表中插入购物车
+// AddCart 向购物车表中插入购物车
 func AddCart(cart *model.Cart) error {
 	//写sql语句
 	sqlStr := "insert into carts(id,total_count,total_amount,user_id) values(?,?,?,?)"
@@ -30,10 +30,10 @@ func AddCart(cart *model.Cart) error {
 
 // GetCartByUserID 根据用户的id从数据库中查询对应的购物车
 func GetCartByUserID(userID int) (*model.Cart, error) {
-	sql:="select id,total_count,total_amount,user_id from carts where user_id=?"
-	row:=utils.Db.QueryRow(sql,userID)
+	sql := "select id,total_count,total_amount,user_id from carts where user_id=?"
+	row := utils.Db.QueryRow(sql, userID)
 	//创建一个购物车
-	cart:=&model.Cart{}
+	cart := &model.Cart{}
 	err := row.Scan(&cart.CartID, &cart.TotalCount, &cart.TotalAmount, &cart.UserID)
 	if err != nil {
 		return nil, err
@@ -44,7 +44,8 @@ func GetCartByUserID(userID int) (*model.Cart, error) {
 	cart.CartItems = cartItems
 	return cart, nil
 }
-//UpdateCart 更新购物车中的图书的总数量和总金额
+
+// UpdateCart 更新购物车中的图书的总数量和总金额
 func UpdateCart(cart *model.Cart) error {
 	sql := "update carts set total_count = ? , total_amount = ? where id = ?"
 	_, err := utils.Db.Exec(sql, cart.GetTotalCount(), cart.GetTotalAmount(), cart.CartID)
@@ -54,7 +55,7 @@ func UpdateCart(cart *model.Cart) error {
 	return nil
 }
 
-//DeleteCartByCartID 根据购物车的id删除购物车
+// DeleteCartByCartID 根据购物车的id删除购物车
 func DeleteCartByCartID(cartID string) error {
 	//删除购物车之前需要先删除所有的购物项
 	err := DeleteCartItemsByCartID(cartID)
@@ -70,4 +71,3 @@ func DeleteCartByCartID(cartID string) error {
 	}
 	return nil
 }
-
