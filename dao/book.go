@@ -37,7 +37,7 @@ func AddBook(b *model.Book) error {
 	return nil
 }
 
-//DeleteBook 根据图书的id从数据库中删除一本图书
+// DeleteBook 根据图书的id从数据库中删除一本图书
 func DeleteBook(bookID string) error {
 	sqlStr := "delete from books where id = ?"
 	_, err := utils.Db.Exec(sqlStr, bookID)
@@ -48,7 +48,7 @@ func DeleteBook(bookID string) error {
 	return nil
 }
 
-//GetBookByID 根据图书的id从数据库中查询出一本图书
+// GetBookByID 根据图书的id从数据库中查询出一本图书
 func GetBookByID(bookID string) (*model.Book, error) {
 	sqlStr := "select id,title,author,price,sales,stock,img_path from books where id = ?"
 	row := utils.Db.QueryRow(sqlStr, bookID)
@@ -59,7 +59,7 @@ func GetBookByID(bookID string) (*model.Book, error) {
 	return book, nil
 }
 
-//UpdateBook 根据图书的id更新图书信息
+// UpdateBook 根据图书的id更新图书信息
 func UpdateBook(b *model.Book) error {
 	sqlStr := "update books set title=?,author=?,price=?,sales=?,stock=? where id=?"
 	_, err := utils.Db.Exec(sqlStr, b.Title, b.Author, b.Price, b.Sales, b.Stock, b.ID)
@@ -70,7 +70,7 @@ func UpdateBook(b *model.Book) error {
 	return nil
 }
 
-//GetPageBooks 获取带分页的图书信息
+// GetPageBooks 获取带分页的图书信息
 func GetPageBooks(pageNo string) (*model.Page, error) {
 	//将页码转换为int64类型
 	iPageNo, _ := strconv.ParseInt(pageNo, 10, 64)
@@ -119,7 +119,7 @@ func GetPageBooks(pageNo string) (*model.Page, error) {
 	return page, nil
 }
 
-//GetPageBooksByPrice 获取带分页和价格范围的图书信息
+// GetPageBooksByPrice 获取带分页和价格范围的图书信息
 func GetPageBooksByPrice(pageNo string, minPrice string, maxPrice string) (*model.Page, error) {
 	//将页码转换为int64类型
 	iPageNo, _ := strconv.ParseInt(pageNo, 10, 64)

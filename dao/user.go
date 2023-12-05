@@ -5,7 +5,7 @@ import (
 	"BookStore/utils"
 )
 
-//CheckUserNameAndPassword 根据用户名和密码从数据库中查询一条记录（登录校验）
+// CheckUserNameAndPassword 根据用户名和密码从数据库中查询一条记录（登录校验）
 func CheckUserNameAndPassword(username string, password string) (*model.User, error) {
 	sqlStr := "select id,username,password,email from users where username = ? and password = MD5(?)"
 
@@ -18,7 +18,7 @@ func CheckUserNameAndPassword(username string, password string) (*model.User, er
 	return user, nil
 }
 
-//CheckUserName 根据用户名从数据库中查询一条记录(注册时查重）
+// CheckUserName 根据用户名从数据库中查询一条记录(注册时查重）
 func CheckUserName(username string) (*model.User, error) {
 	sqlStr := "select id,username,password,email from users where username = ?"
 
@@ -26,13 +26,13 @@ func CheckUserName(username string) (*model.User, error) {
 	user := &model.User{}
 	err := row.Scan(&user.ID, &user.UserName, &user.PassWord, &user.Email)
 	if err != nil {
-	//在数据库中没有查询到
+		//在数据库中没有查询到
 		return nil, err
 	}
 	return user, nil
 }
 
-//SaveUser 向数据库中插入用户信息
+// SaveUser 向数据库中插入用户信息
 func SaveUser(username string, password string, email string) error {
 	sqlStr := "insert into users(username,password,email) values(?,MD5(?),?)"
 

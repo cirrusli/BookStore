@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-//TestMain 可以在测试之前运行
+// TestMain 可以在测试之前运行
 func TestMain(m *testing.M) {
 	fmt.Println("测试bookdao中的方法")
 	m.Run()
